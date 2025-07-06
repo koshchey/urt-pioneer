@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  ros2:
+    image: pioneer-test:latest
+    network_mode: host
+    build:
+      context: .
+    volumes:
+      - type: bind
+        source: /dev/shm
+        target: /dev/shm
+    devices:
+      - "/dev/bus/usb:/dev/bus/usb"
