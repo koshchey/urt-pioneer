@@ -17,11 +17,13 @@ services:
     environment:
       - DISPLAY
       - QT_X11_NO_MITSHM=1
-      - XAUTHORITY=/root/.Xauthority
+      - XAUTHORITY
       - NVIDIA_DRIVER_CAPABILITIES=all
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      - $HOME/.Xauthority:/root/.Xauthority:rw
+      # maybe try:
+      # - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
+      - ${XAUTHORITY}:/root/.Xauthority:rw
       - /dev:/dev
     devices:
       - "/dev/bus/usb:/dev/bus/usb"
