@@ -3,12 +3,14 @@
 set -e
 
 distro=humble
+workspace=pioneer_test_ws
 
 export ROS_DOMAIN_ID=42
 
 source /opt/ros/${distro}/setup.bash
-source /app/pioneer-test-ws/install/setup.bash
+cd ${workspace}
+source install/setup.bash
 colcon build
-source /app/pioneer-test-ws/install/setup.bash
+source install/setup.bash
 
 exec "$@"

@@ -1,13 +1,27 @@
-version: '3.8'
 services:
-  ros2:
+  base:
     image: pioneer-test:latest
-    network_mode: host
     build:
       context: .
+      args:
+        ROS_DISTRO: humble
+        WORKSPACE: pioneer_test_ws
+    privileged: true
+    # interactive shell
+    stdin_open: true
+    tty: true
+    # networking and IPC for ROS 2
+    network_mode: host
+    ipc: host
+    # need this for gui
+    environment:
+      - DISPLAY
+      - QT_X11_NO_MITSHM=1
+      - XAUTHORITY=/root/.Xauthority
+      - NVIDIA_DRIVER_CAPABILITIES=all
     volumes:
-      - type: bind
-        source: /dev/shm
-        target: /dev/shm
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - $HOME/.Xauthority:/root/.Xauthority:rw
+      - /dev:/dev
     devices:
       - "/dev/bus/usb:/dev/bus/usb"
