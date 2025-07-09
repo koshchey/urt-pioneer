@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  xeyes:
+    image: xeyes_test:latest
+    container_name: xeyes_test-latest
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - .config:/home/eyesim/.config/   
+    environment:
+      - DISPLAY
+      - XDG_RUNTIME_DIR
