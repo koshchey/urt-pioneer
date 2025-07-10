@@ -1,2 +1,0 @@
-[console_scripts]
-imu_test_node = imu.imu_test:main

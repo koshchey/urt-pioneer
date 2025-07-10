@@ -1,0 +1,31 @@
+services:
+  base:
+    image: pioneer_urt:latest
+    build:
+      context: .
+      args:
+        ROS_DISTRO: humble
+        WORKSPACE: pioneer_urt
+    privileged: true
+    stdin_open: true
+    tty: true
+    network_mode: host
+    ipc: host
+    environment:
+      - DISPLAY
+      - QT_X11_NO_MITSHM=1
+    volumes:
+      - type: bind
+        source: /dev/shm
+        target: /dev/shm
+      - type: bind
+        source: /dev
+        target: /dev
+      - type: bind
+        source: /dev/bus/usb
+        target: /dev/bus/usb
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    devices:
+      - "/dev/bus/usb:/dev/bus/usb"
+    device_cgroup_rules:
+      - "c 189:* rmw"
