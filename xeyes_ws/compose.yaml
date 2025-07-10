@@ -2,11 +2,14 @@ version: "3"
 
 services:
   xeyes:
-    image: xeyes_test:latest
-    container_name: xeyes_test-latest
+    image: xeyes-test:latest
+    container_name: xeyes-test-latest
+    network_mode: host
     volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix
-      - .config:/home/eyesim/.config/   
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
     environment:
       - DISPLAY
-      - XDG_RUNTIME_DIR
+      - QT_X11_NO_MITSHM=1
+    privileged: True
+    device_cgroup_rules:
+      - "c 189:* mrw"
