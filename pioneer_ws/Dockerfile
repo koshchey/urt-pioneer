@@ -12,8 +12,6 @@ SHELL ["/bin/bash", "-c"]
 
 WORKDIR /app
 
-COPY src ${WORKSPACE}/src
-
 RUN useradd -ms /bin/bash pioneer
 
 USER root
@@ -39,13 +37,16 @@ RUN apt-get install -y \
 RUN apt-get install -y software-properties-common && \
     add-apt-repository ppa:kisak/kisak-mesa
 
-RUN source /opt/ros/${ROS_DISTRO}/setup.bash && \
-    rosdep update && \
-    rosdep install --from-paths ${WORKSPACE}/src --ignore-src --rosdistro ${ROS_DISTRO} -y
+# RUN source /opt/ros/${ROS_DISTRO}/setup.bash && \
+#     rosdep update && \
+#     rosdep install --from-paths ${WORKSPACE}/src --ignore-src --rosdistro ${ROS_DISTRO} -y
 
 RUN apt-get autoremove -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+# Copy our packages
+COPY src ${WORKSPACE}/src
 
 RUN cd ${WORKSPACE} && \
     colcon build && \
