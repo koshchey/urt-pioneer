@@ -31,8 +31,9 @@ RUN rosdep update && \
 RUN apt-get install -y \
     ros-${ROS_DISTRO}-rviz2 \
     ros-${ROS_DISTRO}-sick-scan-xd \
-    ros-${ROS_DISTRO}-teleop-twist-joy \
-    ros-${ROS_DISTRO}-depthai-ros-driver
+    ros-${ROS_DISTRO}-depthai-ros \
+    # ros-${ROS_DISTRO}-depthai-ros-driver \
+    ros-${ROS_DISTRO}-rtabmap-ros
 
 RUN apt-get install -y software-properties-common && \
     add-apt-repository ppa:kisak/kisak-mesa
@@ -55,7 +56,7 @@ RUN cd ${WORKSPACE} && \
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-COPY --chown=pioneer:pioneer --chmod=700 . ${WORKSPACE}
+#COPY --chown=pioneer:pioneer --chmod=700 . ${WORKSPACE}
 RUN chown -R pioneer ${WORKSPACE}
 RUN gpasswd --add pioneer dialout
 

@@ -11,7 +11,8 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         # Launch files:
-        ('share/' + package_name + '/launch', ['launch/stereo_launch.py']),
+        ('share/' + package_name + '/launch', ['launch/stereo_launch_test.py']),
+        ('share/' + package_name + '/launch', ['launch/rtab_launch_test.py']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,

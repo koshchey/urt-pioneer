@@ -9,6 +9,7 @@ import launch_ros.actions
 import launch_ros.descriptions
 
 # Adapted from stereo.launch.py from the depthai repo
+# Example of launching stereo in Rviz
 
 def generate_launch_description():
     default_rviz = os.path.join(get_package_share_directory('depthai_examples'),
