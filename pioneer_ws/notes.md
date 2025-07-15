@@ -1,5 +1,18 @@
 ## Notes
 
+Build
+`sudo docker build -t pioneer_urt .`
+pioneer_urt is the name of the image
+
+To run in background
+`docker compose up`
+`docker compose down`
+
+To enter container
+`sudo docker compose run --rm base`
+base is the name of the service specified in the compose file
+
+
 ## Docker
 Remove dangling images (indicated as <none>:<none> though not all these may be dangling):
 `docker rmi $(docker images -f "dangling=true" -q)`
